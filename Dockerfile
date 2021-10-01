@@ -4,16 +4,16 @@ WORKDIR /source
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY aspnetapp/*.csproj ./aspnetapp/
+COPY ConversaoPeso.Web/*.csproj ./ConversaoPeso.Web/
 RUN dotnet restore
 
 # copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /source/aspnetapp
+COPY ConversaoPeso.Web/. ./ConversaoPeso.Web/
+WORKDIR /source/ConversaoPeso.Web
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+ENTRYPOINT ["dotnet", "ConversaoPeso.Web.dll"]
