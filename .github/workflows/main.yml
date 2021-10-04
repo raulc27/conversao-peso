@@ -8,7 +8,7 @@ on:
 
 jobs:
   CI:
-    runs-on: debian-latest
+    runs-on: alpine
     steps:
       - uses: actions/checkout@v2
       - name: Docker Login   
